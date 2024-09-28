@@ -1,3 +1,5 @@
+//easy_level_solution
+
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -12,4 +14,79 @@ int main() {
     else{
         cout<<"No"<<endl;
     }
+}
+
+//medium_level_solution
+
+#include <iostream>
+#include <string>
+using namespace std;
+
+bool isVowel(char ch) {
+    return (ch == 'a' || ch == 'e' || ch == 'i' || ch == 'o' || ch == 'u');
+}
+
+int main() {
+    int T;
+    cin >> T;  // Number of test cases
+    while (T--) {
+        int N;
+        string S;
+        cin >> N >> S;  // Length of the string and the string itself
+        int consonant_count = 0;
+        bool hard_to_pronounce = false;
+        
+        for (int i = 0; i < N; ++i) {
+            if (!isVowel(S[i])) {
+                consonant_count++;
+                if (consonant_count >= 4) {
+                    hard_to_pronounce = true;
+                    break;
+                }
+            } else {
+                consonant_count = 0;
+            }
+        }
+        
+        if (hard_to_pronounce) {
+            cout << "NO" << endl;
+        } else {
+            cout << "YES" << endl;
+        }
+    }
+    return 0;
+}
+
+//hard_level_solution
+
+#include <iostream>
+#include <unordered_map>
+#include <vector>
+
+using namespace std;
+
+vector<int> twoSum(vector<int>& nums, int target) {
+    unordered_map<int, int> num_map; // To store the value and its index
+    for (int i = 0; i < nums.size(); ++i) {
+        int complement = target - nums[i]; // Calculate the complement
+        if (num_map.find(complement) != num_map.end()) {
+            // If complement is found, return the indices
+            return {num_map[complement], i};
+        }
+        // Otherwise, add the current number to the map
+        num_map[nums[i]] = i;
+    }
+    // This will never be reached since we are guaranteed to have a solution
+    return {};
+}
+
+int main() {
+    // Example 1
+    vector<int> nums = {2, 7, 11, 15};
+    int target = 9;
+    vector<int> result = twoSum(nums, target);
+
+    cout << "Indices: [" << result[0] << ", " << result[1] << "]" << endl;
+
+    return 0;
 }
