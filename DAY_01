@@ -6,6 +6,7 @@ using namespace std;
 int main() {
 	// your code goes here
     int x;
+    cout<<"enter the value of x"<<endl;
     cin>>x;
     
     if(x >= 12) {
